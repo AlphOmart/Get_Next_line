@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 10:10:38 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/02/17 18:32:53 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/02/17 19:34:56 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*ft_get_line(char *s)
 		return (NULL);
 	while (s[i] && s[i] != '\n')
 		i++;
-	line = malloc(sizeof(char) * (i + 1));
+	line = malloc(sizeof(char) * (i + 2));
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -55,7 +55,7 @@ char	*ft_new_str(char str[BUFFER_SIZE + 1], char *temp)
 		while (++j < BUFFER_SIZE + 1)
 			str[j] = '\0';
 	i++;
-	while (++j < BUFFER_SIZE)
+	while (++j < BUFFER_SIZE + 1)
 	{
 		if (temp[i])
 			str[j] = temp[i++];
@@ -92,6 +92,15 @@ static char	*ft_read(int fd, char *temp)
 	return (temp);
 }
 
+static void	ft_reset_stat(char	*str)
+{
+	size_t	i;
+
+	i = -1;
+	while (++i < BUFFER_SIZE + 1)
+		str[i] = '\0';
+}
+
 char	*get_next_line(int fd)
 {
 	static char	str[BUFFER_SIZE + 1];
@@ -105,7 +114,10 @@ char	*get_next_line(int fd)
 		temp = ft_strjoin(temp, str);
 	temp = ft_read(fd, temp);
 	if (!temp)
+	{
+		ft_reset_stat(str);
 		return (NULL);
+	}
 	line = ft_get_line(temp);
 	ft_new_str(str, temp);
 	return (line);
