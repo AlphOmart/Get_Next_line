@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 10:10:38 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/02/17 15:57:59 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/02/17 16:48:39 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,25 @@ char	*ft_new_str(char str[BUFFER_SIZE + 1], char *temp)
 	size_t	j;
 
 	i = 0;
+	j = 0;
 	if (!temp)
 		return (NULL);
 	while (temp[i] && temp[i] != '\n')
 		i++;
 	if (!temp[i])
-		return (NULL);
-	j = ft_strlen(&temp[i]);
-	j = 0;
+		while (j < BUFFER_SIZE + 1)
+		{
+			str[j] = '\0';
+			j++;
+		}
 	i++;
-	while (temp[i])
+	while (j < BUFFER_SIZE)
 	{
-		str[j++] = temp[i++];
+		if (temp[i])
+			str[j++] = temp[i++];
+		else if (!temp[i])
+			str[j++] = '\0';
 	}
-	while (j++ < BUFFER_SIZE)
-		str[j] = '\0';
 	free(temp);
 	return (str);
 }

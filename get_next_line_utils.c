@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 12:40:30 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/02/17 15:57:57 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/02/17 16:45:24 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		concat_str[i] = s1[i];
 	while (s2[j])
 		concat_str[i++] = s2[j++];
-	concat_str[i + j] = '\0';
+	concat_str[i] = '\0';
 	free(s1);
 	return (concat_str);
 }
