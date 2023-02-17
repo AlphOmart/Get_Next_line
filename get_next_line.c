@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mwubneh <mwubneh@student.42lyon.fr >       +#+  +:+       +#+        */
+/*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 10:10:38 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/02/17 16:48:39 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/02/17 18:32:53 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,21 @@ char	*ft_new_str(char str[BUFFER_SIZE + 1], char *temp)
 	size_t	j;
 
 	i = 0;
-	j = 0;
+	j = -1;
 	if (!temp)
 		return (NULL);
 	while (temp[i] && temp[i] != '\n')
 		i++;
 	if (!temp[i])
-		while (j < BUFFER_SIZE + 1)
-		{
+		while (++j < BUFFER_SIZE + 1)
 			str[j] = '\0';
-			j++;
-		}
 	i++;
-	while (j < BUFFER_SIZE)
+	while (++j < BUFFER_SIZE)
 	{
 		if (temp[i])
-			str[j++] = temp[i++];
+			str[j] = temp[i++];
 		else if (!temp[i])
-			str[j++] = '\0';
+			str[j] = '\0';
 	}
 	free(temp);
 	return (str);
@@ -81,6 +78,8 @@ static char	*ft_read(int fd, char *temp)
 	while (ft_found(temp, '\n') == 0 && rd != 0)
 	{
 		rd = read(fd, s, BUFFER_SIZE);
+		if (rd == 0)
+			break ;
 		if (rd == -1)
 		{
 			free(s);
