@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 10:10:38 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/02/18 10:31:15 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/02/18 10:32:39 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*ft_get_line(char *s)
 	return (line);
 }
 
-void	ft_new_str(char *str, char *temp)
+void	ft_new_buffer(char *buffer, char *temp)
 {
 	size_t	i;
 	size_t	j;
@@ -53,14 +53,14 @@ void	ft_new_str(char *str, char *temp)
 		i++;
 	if (!temp[i])
 		while (++j < BUFFER_SIZE + 1)
-			str[j] = '\0';
+			buffer[j] = '\0';
 	i++;
 	while (++j < BUFFER_SIZE + 1)
 	{
 		if (temp[i])
-			str[j] = temp[i++];
+			buffer[j] = temp[i++];
 		else if (!temp[i])
-			str[j] = '\0';
+			buffer[j] = '\0';
 	}
 	free(temp);
 }
@@ -84,33 +84,33 @@ static char	*ft_read(int fd, char *temp)
 	return (temp);
 }
 
-static void	ft_reset_stat(char	*str)
+static void	ft_reset_stat(char	*buffer)
 {
 	size_t	i;
 
 	i = -1;
 	while (++i < BUFFER_SIZE + 1)
-		str[i] = '\0';
+		buffer[i] = '\0';
 }
 
 char	*get_next_line(int fd)
 {
-	static char	str[BUFFER_SIZE + 1];
+	static char	buffer[BUFFER_SIZE + 1];
 	char		*temp;
 	char		*line;
 
 	temp = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (str[0])
-		temp = ft_strjoin(temp, str);
+	if (buffer[0])
+		temp = ft_strjoin(temp, buffer);
 	temp = ft_read(fd, temp);
 	if (!temp)
 	{
-		ft_reset_stat(str);
+		ft_reset_stat(buffer);
 		return (NULL);
 	}
 	line = ft_get_line(temp);
-	ft_new_str(str, temp);
+	ft_new_buffer(buffer, temp);
 	return (line);
 }
