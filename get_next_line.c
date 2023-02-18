@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 10:10:38 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/02/18 10:35:08 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/02/18 10:40:58 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,10 @@ static char	*ft_read(int fd, char *temp)
 		if (rd == 0)
 			break ;
 		if (rd == -1)
+		{
+			free(temp);
 			return (NULL);
+		}
 		s[rd] = '\0';
 		temp = ft_strjoin(temp, s);
 	}
