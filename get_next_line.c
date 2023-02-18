@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 10:10:38 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/02/18 10:33:29 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/02/18 10:35:08 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ static void	ft_new_buffer(char *buffer, char *temp)
 	size_t	i;
 	size_t	j;
 
-	i = 0;
-	j = -1;
 	if (!temp)
 		return ;
+	i = 0;
 	while (temp[i] && temp[i] != '\n')
 		i++;
+	j = -1;
 	if (!temp[i])
 		while (++j < BUFFER_SIZE + 1)
 			buffer[j] = '\0';
