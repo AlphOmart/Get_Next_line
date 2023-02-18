@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 10:10:38 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/02/18 10:32:39 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/02/18 10:33:29 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*ft_get_line(char *s)
 	return (line);
 }
 
-void	ft_new_buffer(char *buffer, char *temp)
+static void	ft_new_buffer(char *buffer, char *temp)
 {
 	size_t	i;
 	size_t	j;
