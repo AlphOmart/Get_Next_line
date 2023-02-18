@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 10:10:38 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/02/18 10:26:55 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/02/18 10:31:15 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,9 @@ void	ft_new_str(char *str, char *temp)
 
 static char	*ft_read(int fd, char *temp)
 {
-	char	*s;
+	char	s[BUFFER_SIZE + 1];
 	int		rd;
 
-	s = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!s)
-		return (NULL);
 	rd = 1;
 	while (ft_found(temp, '\n') == 0 && rd != 0)
 	{
@@ -80,14 +77,10 @@ static char	*ft_read(int fd, char *temp)
 		if (rd == 0)
 			break ;
 		if (rd == -1)
-		{
-			free(s);
 			return (NULL);
-		}
 		s[rd] = '\0';
 		temp = ft_strjoin(temp, s);
 	}
-	free(s);
 	return (temp);
 }
 
