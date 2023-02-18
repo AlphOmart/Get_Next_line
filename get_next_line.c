@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 10:10:38 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/02/17 19:34:56 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/02/18 10:26:55 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*ft_get_line(char *s)
 	return (line);
 }
 
-char	*ft_new_str(char str[BUFFER_SIZE + 1], char *temp)
+void	ft_new_str(char *str, char *temp)
 {
 	size_t	i;
 	size_t	j;
@@ -48,7 +48,7 @@ char	*ft_new_str(char str[BUFFER_SIZE + 1], char *temp)
 	i = 0;
 	j = -1;
 	if (!temp)
-		return (NULL);
+		return ;
 	while (temp[i] && temp[i] != '\n')
 		i++;
 	if (!temp[i])
@@ -63,7 +63,6 @@ char	*ft_new_str(char str[BUFFER_SIZE + 1], char *temp)
 			str[j] = '\0';
 	}
 	free(temp);
-	return (str);
 }
 
 static char	*ft_read(int fd, char *temp)
