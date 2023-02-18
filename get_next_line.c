@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: mwubneh <mwubneh@student.42lyon.fr >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 10:10:38 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/02/18 11:05:38 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/02/18 11:51:56 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,30 @@ static void	ft_new_buffer(char *buffer, char *temp)
 
 static char	*ft_read(int fd, char *temp)
 {
-	char	s[BUFFER_SIZE + 1];
+	char	*s;
 	int		rd;
 
 	rd = 1;
+	s = malloc (sizeof(char) * (BUFFER_SIZE + 1));
+	if (!s)
+		return (NULL);
 	while (ft_found(temp, '\n') == 0 && rd != 0)
 	{
 		rd = read(fd, s, BUFFER_SIZE);
 		if (rd == 0)
+		{
 			break ;
+		}
 		if (rd == -1)
 		{
+			free(s);
 			free(temp);
 			return (NULL);
 		}
 		s[rd] = '\0';
 		temp = ft_strjoin(temp, s);
 	}
+	free(s);
 	return (temp);
 }
 
